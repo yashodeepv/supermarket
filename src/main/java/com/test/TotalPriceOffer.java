@@ -24,7 +24,7 @@ public class TotalPriceOffer implements Offer {
         if(getTotalPriceBeforeDiscount(products).compareTo(totalPrice) > 0) {
             products.stream().forEach(p -> {
                 discountByProduct.put(p, discountByProduct.getOrDefault(p, ZERO)
-                        .add(p.getPrice().multiply(discount)));
+                        .add(p.getPrice().multiply(discount).setScale(2)));
             });
         }
     }

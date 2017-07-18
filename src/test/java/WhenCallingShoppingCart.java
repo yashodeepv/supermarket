@@ -1,20 +1,16 @@
 import com.test.*;
 import org.hamcrest.CoreMatchers;
-import org.hamcrest.Matcher;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class ShoppingCartTest {
+public class WhenCallingShoppingCart {
 
     ShoppingCart shoppingCart;
 
@@ -30,7 +26,6 @@ public class ShoppingCartTest {
             .price(new BigDecimal("100"))
             .build();
 
-
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
@@ -40,7 +35,7 @@ public class ShoppingCartTest {
     }
 
     @Test
-    public void shouldAddProductInTheCart() {
+    public void should_add_product_in_the_cart() {
         // when
         shoppingCart.add(soap, 5);
 
@@ -50,16 +45,13 @@ public class ShoppingCartTest {
     }
 
     @Test
-    public void shouldThrowPriceNotFoundException() {
+    public void should_throw_exception() {
         expectedException.expect(Exception.class);
-        Product p = Product.builder().name("123").build();
+        Product.builder().name("123").build();
     }
 
     @Test
-    public void shouldAddProductsWithOfferAndReturnTotalDiscountFor3Soaps() {
-        // given
-
-
+    public void should_add_products_with_offer_and_return_total_discount_for_3_soaps() {
         // when
         shoppingCart.add(soap, 3);
 
@@ -70,10 +62,7 @@ public class ShoppingCartTest {
     }
 
     @Test
-    public void shouldAddProductsWithOfferAndReturnTotalDiscountFor5Soaps() {
-        // given
-
-
+    public void should_add_products_with_offer_and_return_total_discount_for_5_soaps() {
         // when
         shoppingCart.add(soap, 5);
 
@@ -84,10 +73,7 @@ public class ShoppingCartTest {
     }
 
     @Test
-    public void shouldAddProductsWithOfferAndReturnTotalDiscountFor3SoapsAnd2Deos() {
-        // given
-
-
+    public void should_add_products_with_offer_and_return_total_discount_for_3_soaps_and_2_deos() {
         // when
         shoppingCart.add(soap, 3);
         shoppingCart.add(deo, 2);
@@ -99,9 +85,8 @@ public class ShoppingCartTest {
     }
 
     @Test
-    public void shouldApplyBuy1Get50PercentDiscountOfferOnEligibleProducts() {
+    public void should_apply_buy_1_get_50_percent_discount_offer_on_eligible_products() {
         // given
-
         Product doveSoap = Product.builder()
                 .id(1l)
                 .name("Dove")
@@ -119,9 +104,8 @@ public class ShoppingCartTest {
     }
 
     @Test
-    public void shouldApplyDiscountOnTotalPrice() {
+    public void should_apply_discount_on_total_price() {
         // given
-
         Product dove = Product.builder()
                 .id(1l)
                 .name("Dove")
@@ -143,13 +127,8 @@ public class ShoppingCartTest {
         assertThat(shoppingCart.getTotalPrice(dove), is(new BigDecimal("120.00")));
         assertThat(shoppingCart.getTotalPrice(axe), is(new BigDecimal("320.00")));
         assertThat(shoppingCart.getTotalPrice(), is(new BigDecimal("440.00")));
-        assertThat(shoppingCart.getDiscountByProduct().get(soap), is(new BigDecimal("30.00")));
+        assertThat(shoppingCart.getDiscountByProduct().get(dove), is(new BigDecimal("30.00")));
         assertThat(shoppingCart.getTotalPrice(axe), is(new BigDecimal("320.00")));
         assertThat(shoppingCart.getTotalPrice(), is(new BigDecimal("440.00")));
-
-
-
-
     }
-
 }

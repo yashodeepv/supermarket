@@ -25,7 +25,7 @@ public class BuyXGetYOffer implements Offer {
             BigDecimal calculatedDiscount = product.getPrice();
             discountByProduct.put(product,
                     discountByProduct.getOrDefault(discountByProduct, ZERO)
-                            .add(calculatedDiscount));
+                            .add(calculatedDiscount).setScale(2));
         }
     }
 }

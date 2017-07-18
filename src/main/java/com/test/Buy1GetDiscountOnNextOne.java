@@ -29,7 +29,7 @@ public class Buy1GetDiscountOnNextOne implements Offer {
             BigDecimal calculatedDiscount = (product.getPrice().multiply(discount));
             discountByProduct.put(product,
                     discountByProduct.getOrDefault(discountByProduct, ZERO)
-                            .add(calculatedDiscount));
+                            .add(calculatedDiscount).setScale(2));
         }
     }
 }
