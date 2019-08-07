@@ -1,2 +1,1 @@
-# Basic Super Market using TDD
-## Interview Question
+# TDD (Test Driven Development) - Basic Super Market scenarios
